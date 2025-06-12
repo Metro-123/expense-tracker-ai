@@ -1,3 +1,4 @@
+import os 
 from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
 from ai_assistant import get_budget_advice
@@ -26,4 +27,4 @@ def advice():
     return jsonify({"advice": get_budget_advice(income, expenses)})
 
 if __name__ == '__main__':
-   socketio.run(app, debug=True, allow_unsafe_werkzeug=True)
+  socketio.run(app, debug=True, allow_unsafe_werkzeug=True, host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
